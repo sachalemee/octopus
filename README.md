@@ -54,4 +54,4 @@ See the complete repository architecture here: [OCTOPUS Project structure](doc/P
 
 This project is licensed under the **MIT License**.
 
-![OCTOPUS License : MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![OCTOPUS License : MIT](https://img.shields.io/badge/License-MIT-white.svg)
