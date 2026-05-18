@@ -1,6 +1,6 @@
 # OCTOPUS
 
-![OCTOPUS Storefront Image](doc/octopus_x_ansible.svg)
+![OCTOPUS Storefront Image](doc/octopus_x_ansible_white.svg)
 
 ### Development
 
