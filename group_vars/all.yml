@@ -1,0 +1,18 @@
+# hosts
+redis_host: "{{ hostvars[groups['redis'][0]].ansible_host }}"
+postgresql_host: "{{ hostvars[groups['postgresql'][0]].ansible_host }}"
+
+# redis
+redis_port: 6379
+
+# postgresql
+postgresql_port: 5432
+postgresql_db: paul
+postgresql_user: paul
+postgresql_password: "{{ vault_postgresql_password }}"
+
+# poll
+poll_port: 80
+
+# result
+result_port: 80
