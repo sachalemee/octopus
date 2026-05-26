@@ -1,0 +1,32 @@
+- name: update apt cache # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/apt_module.html
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: install base packages # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/apt_module.html
+  ansible.builtin.apt:
+    name:
+      - curl
+      - wget
+      - vim
+      - git
+      - htop
+      - unzip
+      - ca-certificates
+      - gnupg
+      - lsb-release
+      - python3
+      - python3-pip
+      - systemd
+      - sudo
+    status: present
+
+- name: set utc timezone
+  community.general.timezone: # https://docs.ansible.com/projects/ansible/latest/collections/community/general/timezone_module.html
+    name: UTC
+
+- name: ensure systemd is running # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_module.html
+  ansible.builtin.service:
+    name: systemd-journald
+    state: started
+    enabled: true
