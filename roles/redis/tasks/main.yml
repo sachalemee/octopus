@@ -12,3 +12,9 @@
     group:
     mode:
   notify: Restart Redis
+
+- name: enable and start redis service # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_module.html
+  ansible.builtin.service:
+    name: redis-server
+    state: started
+    enabled: true
