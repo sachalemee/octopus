@@ -1,0 +1,36 @@
+- name: Apply base role to all machines # https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html
+  hosts: all
+  become: true
+  roles:
+    - base
+
+- name: Apply redis role
+  hosts: redis
+  become: true
+  roles:
+    - redis
+
+- name: Apply postgresql role
+  hosts: postgresql
+  become: true
+  roles:
+    - postgresql
+
+- name: Apply poll role
+  hosts: poll
+  become: true
+  roles:
+    - poll
+
+- name: Apply worker role
+  hosts: worker
+  become: true
+  roles:
+    - worker
+
+- name: Apply result role
+  hosts: result
+  become: true
+  roles:
+    - result
+
