@@ -35,3 +35,11 @@
   become_user: worker
   args:
     creates: /opt/worker/target/worker.jar
+
+- name: Create worker env directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
+  ansible.builtin.file:
+    path: /etc/worker
+    state: directory
+    owner: worker
+    group: worker
+    mode: '0750'
