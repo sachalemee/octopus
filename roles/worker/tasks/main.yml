@@ -20,3 +20,10 @@
     owner: worker
     group: worker
     mode: '0755'
+
+- name: Upload worker archive # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarchive_module.html
+  ansible.builtin.unarchive:
+    src: worker.tar
+    dest: /opt/worker
+    owner: worker
+    group: worker
