@@ -27,3 +27,11 @@
     dest: /opt/worker
     owner: worker
     group: worker
+
+- name: Build worker with Maven # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
+  ansible.builtin.command:
+    cmd: mvn package -DskipTests
+    chdir: /opt/worker
+  become_user: worker
+  args:
+    creates: /opt/worker/target/worker.jar
