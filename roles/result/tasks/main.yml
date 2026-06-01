@@ -40,3 +40,12 @@
     owner: result
     group: result
     mode: '0750'
+
+- name: Deploy result environment file # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
+  ansible.builtin.template:
+    src: result.env.j2
+    dest: /etc/result/result.env
+    owner: result
+    group: result
+    mode: '0640'
+  notify: Restart result
