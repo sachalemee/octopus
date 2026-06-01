@@ -1,0 +1,5 @@
+- name: Restart worker # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html
+  ansible.builtin.systemd:
+    name: worker
+    state: restarted
+    daemon_reload: true
