@@ -1,0 +1,23 @@
+- name: install postgresql package # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+  ansible.builtin.apt:
+    name:
+      - postgresql-16
+      - postgresql-client-16
+      - python3-psycopg
+    state: present
+    update_cache: true
+
+- name: enable and start postgresql service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/service_module.html
+  ansible.builtin.apt:
+    name: postgresql
+    state: postgresql
+    enabled: true
+
+- name: deploy pg_hba.conf # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+  ansible.builtin.copy:
+    src:
+    dest: /etc/postgresql/16/main/pg_hba.conf
+    owner: postgres
+    group: postgres
+    mode: '0640'
+  notify: Restart Postgresql
