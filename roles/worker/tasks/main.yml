@@ -1,0 +1,7 @@
+- name: Install Java and Maven # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+  ansible.builtin.apt:
+    name:
+      - default-jdk
+      - maven
+    state: present
+    update_cache: true
