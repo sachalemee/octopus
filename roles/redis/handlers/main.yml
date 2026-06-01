@@ -1,0 +1,5 @@
+# https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html
+- name: restart redis # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/service_module.html
+  ansible.builtin.include.service:
+    name: redis-server
+    state: restarted
