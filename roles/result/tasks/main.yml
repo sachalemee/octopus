@@ -32,3 +32,11 @@
   community.general.npm:
     path: /opt/result
     state: present
+
+- name: Create result env directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
+  ansible.builtin.file:
+    path: /etc/result
+    state: directory
+    owner: result
+    group: result
+    mode: '0750'
