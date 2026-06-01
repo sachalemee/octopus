@@ -27,3 +27,8 @@
     dest: /opt/result
     owner: result
     group: result
+
+- name: Install result dependencies # https://docs.ansible.com/ansible/latest/collections/community/general/npm_module.html
+  community.general.npm:
+    path: /opt/result
+    state: present
