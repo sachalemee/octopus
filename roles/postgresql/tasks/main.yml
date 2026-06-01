@@ -15,7 +15,7 @@
 
 - name: deploy pg_hba.conf # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
   ansible.builtin.copy:
-    src:
+    src: pg_hba.conf
     dest: /etc/postgresql/16/main/pg_hba.conf
     owner: postgres
     group: postgres
