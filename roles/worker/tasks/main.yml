@@ -53,9 +53,16 @@
     mode: '0640'
   notify: Restart worker
 
-- name: Deploy worker systemd service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: Deploy worker system service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
   ansible.builtin.copy:
     src: worker.service
     dest: /etc/systemd/system/worker.service
     mode: '0644'
   notify: Restart worker
+
+- name: Enable and start worker service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html
+  ansible.builtin.systemd:
+    name: worker
+    state: started
+    enabled: true
+    daemon_reload: true```
