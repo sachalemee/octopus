@@ -43,3 +43,12 @@
     owner: worker
     group: worker
     mode: '0750'
+
+- name: Deploy worker environment file # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
+  ansible.builtin.template:
+    src: worker.env.j2
+    dest: /etc/worker/worker.env
+    owner: worker
+    group: worker
+    mode: '0640'
+  notify: Restart worker
