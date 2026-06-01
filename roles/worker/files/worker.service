@@ -1,0 +1,14 @@
+# https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html
+[Unit]
+Description=Worker service
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/worker
+EnvironmentFile=/etc/worker/worker.env
+ExecStart=/usr/bin/java -jar /opt/worker/target/worker.jar
+Restart=always
+User=worker
+
+[Install]
+WantedBy=multi-user.target
