@@ -12,3 +12,11 @@
     system: true
     shell: /usr/sbin/nologin
     create_home: false
+
+- name: Create worker directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
+  ansible.builtin.file:
+    path: /opt/worker
+    state: directory
+    owner: worker
+    group: worker
+    mode: '0755'
