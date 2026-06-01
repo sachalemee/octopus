@@ -20,4 +20,5 @@
     owner: postgres
     group: postgres
     mode: '0640'
-  notify: Restart Postgresql
+  notify: Restart PostgreSQL
+
