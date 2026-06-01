@@ -5,3 +5,10 @@
       - maven
     state: present
     update_cache: true
+
+- name: Create worker user # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+  ansible.builtin.user:
+    name: worker
+    system: true
+    shell: /usr/sbin/nologin
+    create_home: false
