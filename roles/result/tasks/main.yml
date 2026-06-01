@@ -13,3 +13,10 @@
     shell: /usr/sbin/nologin
     create_home: false
 
+- name: Create result directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
+  ansible.builtin.file:
+    path: /opt/result
+    state: directory
+    owner: result
+    group: result
+    mode: '0755'
