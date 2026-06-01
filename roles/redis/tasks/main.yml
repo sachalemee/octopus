@@ -3,3 +3,12 @@
     name: redis-server
     state: present
     update_cache: true
+
+- name: deploy redis configuration # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/copy_module.html
+  ansible.builtin.copy:
+    src: redis.conf
+    dest: /etc/redis/redis.conf
+    owner:
+    group:
+    mode:
+  notify: Restart Redis
