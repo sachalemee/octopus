@@ -19,7 +19,7 @@
       - python3-pip
       - systemd
       - sudo
-    status: present
+    state: present
 
 - name: set utc timezone
   community.general.timezone: # https://docs.ansible.com/projects/ansible/latest/collections/community/general/timezone_module.html
