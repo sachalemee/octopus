@@ -1,0 +1,59 @@
+- name: install python and pip # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
+  ansible.builtin.apt:
+    - python3
+    - python3-pip
+    - python3-venv
+  state: present
+  update_cache: true
+
+- name: create poll user # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+  ansible.builtin.user:
+    name: poll
+    system: true
+    shell: /user/sbin/nologin
+    create_home: false
+
+- name: create poll directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
+  path: /opt/poll
+  state: directory
+  owner: poll
+  group: poll
+  mode: '0755'
+
+- name: upload poll archive # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarchive_module.html
+  ansible.builtin.unarchive:
+    src: poll.tar
+    dest: /opt/poll
+    owner: poll
+    group: poll
+
+- name: create poll env directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
+  ansible.builtin.file:
+    path: /etc/poll
+    state: directory
+    owner: poll
+    group: poll
+    mode: '0740'
+
+- name: deploy poll environnement file # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
+  ansible.builtin.template:
+    src: poll.env.j2 
+    dest: /etc/poll/poll.env
+    owner: poll
+    group: poll
+    mode: '0640'
+  notify: Restart poll
+
+- name: deploy poll systemd service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+  ansible.builtin.copy:
+    src: poll.service
+    dest: /etc/systemd/system/poll.service
+    mode: '0644'
+  notify: Restart poll
+
+- name: enable and start poll service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html
+  ansible.builtin.systemd:
+    name: poll
+    state: started
+    enabled: true
+    daemon_reload: true
