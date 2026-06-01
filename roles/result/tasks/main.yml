@@ -49,3 +49,10 @@
     group: result
     mode: '0640'
   notify: Restart result
+
+- name: Deploy result system service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+  ansible.builtin.copy:
+    src: result.service
+    dest: /etc/systemd/system/result.service
+    mode: '0644'
+  notify: Restart result
