@@ -1,24 +1,26 @@
 - name: install python and pip # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
   ansible.builtin.apt:
-    - python3
-    - python3-pip
-    - python3-venv
-  state: present
-  update_cache: true
+    name:
+      - python3
+      - python3-pip
+      - python3-venv
+    state: present
+    update_cache: true
 
 - name: create poll user # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
   ansible.builtin.user:
     name: poll
     system: true
-    shell: /user/sbin/nologin
+    shell: /usr/sbin/nologin
     create_home: false
 
 - name: create poll directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
-  path: /opt/poll
-  state: directory
-  owner: poll
-  group: poll
-  mode: '0755'
+  ansible.builtin.file:
+    path: /opt/poll
+    state: directory
+    owner: poll
+    group: poll
+    mode: '0755'
 
 - name: upload poll archive # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarchive_module.html
   ansible.builtin.unarchive:
@@ -35,9 +37,9 @@
     group: poll
     mode: '0740'
 
-- name: deploy poll environnement file # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html
+- name: deploy poll environment file # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/template_module.html
   ansible.builtin.template:
-    src: poll.env.j2 
+    src: poll.env.j2
     dest: /etc/poll/poll.env
     owner: poll
     group: poll

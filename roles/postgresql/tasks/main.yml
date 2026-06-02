@@ -7,10 +7,10 @@
     state: present
     update_cache: true
 
-- name: enable and start postgresql service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/service_module.html
-  ansible.builtin.apt:
+- name: enable and start postgresql service # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_module.html
+  ansible.builtin.service:
     name: postgresql
-    state: postgresql
+    state: started
     enabled: true
 
 - name: deploy pg_hba.conf # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
@@ -37,14 +37,14 @@
     state: present
   become_user: postgres
 
-- name: apply schema to paul database # https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_script_module.html
-  community.postgresql.postgresql_script:
-    db: "{{ postgresql_db }}"
-    path: /tmp/schema.sql
-  become_user: postgres
-
-- name: upload schema.sql to remote # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+- name: upload schema.sql to remote # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/copy_module.html
   ansible.builtin.copy:
     src: schema.sql
     dest: "/tmp/schema.sql"
     mode: '0644'
+
+- name: apply schema to paul database # https://docs.ansible.com/projects/ansible/latest/collections/community/postgresql/postgresql_script_module.html
+  community.postgresql.postgresql_script:
+    db: "{{ postgresql_db }}"
+    path: /tmp/schema.sql
+  become_user: postgres

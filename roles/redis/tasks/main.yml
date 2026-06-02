@@ -8,9 +8,9 @@
   ansible.builtin.copy:
     src: redis.conf
     dest: /etc/redis/redis.conf
-    owner:
-    group:
-    mode:
+    owner: redis
+    group: redis
+    mode: '0644'
   notify: Restart Redis
 
 - name: enable and start redis service # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_module.html
