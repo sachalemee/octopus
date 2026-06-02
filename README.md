@@ -16,9 +16,12 @@ By *Marin Jeunot*(marin.jeunot@epitech.eu) & *Sacha Lemée*(sacha.lemee@epitech.
 ### Prerequisites
 
 This project requires:
-- have to fill
+- Ansible 2.9+
+- SSH access to target machines (with SSH keys configured)
+- Python 3 on target machines
+- Linux/Unix environment (control node)
 
-*No external library is required.*
+*No external libraries beyond Ansible are required.*
 
 ### Installation for Linux
 
@@ -31,19 +34,43 @@ git clone git@github.com:EpitechPGE2-2025/G-DOP-400-PAR-4-1-octopus-15.git
 2. **Navigate to the project directory:**
 
 ```sh
-cd G-DOP-400-PAR-4-1-octopus-15.git
+cd G-DOP-400-PAR-4-1-octopus-15
 ```
 
-3. **Build the project:**
+3. **Configure your inventory:**
 
-```sh
-have to fill
+Edit or create an inventory file (typically in `/etc/ansible/hosts` or a local `inventory.ini`) with your target machines:
+
+```ini
+[redis]
+redis-server ansible_host=192.168.1.10 ansible_user=ubuntu
+
+[postgresql]
+postgres-server ansible_host=192.168.1.11 ansible_user=ubuntu
+
+[poll]
+poll-server ansible_host=192.168.1.12 ansible_user=ubuntu
+
+[worker]
+worker-server ansible_host=192.168.1.13 ansible_user=ubuntu
+
+[result]
+result-server ansible_host=192.168.1.14 ansible_user=ubuntu
+
+[all:vars]
+ansible_become_pass=your_sudo_password
 ```
 
-4. **Run the raytracer:**
+4. **Run the playbook:**
 
 ```sh
-have to fill
+ansible-playbook playbook.yml -i inventory.ini
+```
+
+Or use the one-click deployment script:
+
+```sh
+./one-click.sh
 ```
 
 ## Repository Architecture
