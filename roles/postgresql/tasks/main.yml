@@ -20,7 +20,7 @@
     owner: postgres
     group: postgres
     mode: '0640'
-  notify: Restart PostgreSQL
+  notify: restart postgresql
 
 - name: create postgresql user paul # https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_user_module.html
   community.postgresql.postgresql_user:

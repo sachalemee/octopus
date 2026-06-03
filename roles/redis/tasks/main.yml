@@ -11,7 +11,7 @@
     owner: redis
     group: redis
     mode: '0644'
-  notify: Restart Redis
+  notify: restart redis
 
 - name: enable and start redis service # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_module.html
   ansible.builtin.service:
