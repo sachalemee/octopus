@@ -4,9 +4,9 @@ Description=Worker service
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/worker
+WorkingDirectory=/opt/worker/worker
 EnvironmentFile=/etc/worker/worker.env
-ExecStart=/usr/bin/java -jar /opt/worker/target/worker.jar
+ExecStart=/usr/bin/java -jar /opt/worker/worker/target/worker.jar
 Restart=always
 User=worker
 

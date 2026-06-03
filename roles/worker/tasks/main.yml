@@ -11,7 +11,7 @@
     name: worker
     system: true
     shell: /usr/sbin/nologin
-    create_home: false
+    create_home: true
 
 - name: Create worker directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
   ansible.builtin.file:
@@ -31,10 +31,10 @@
 - name: Build worker with Maven # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/command_module.html
   ansible.builtin.command:
     cmd: mvn package -DskipTests
-    chdir: /opt/worker
+    chdir: /opt/worker/worker
   become_user: worker
   args:
-    creates: /opt/worker/target/worker.jar
+    creates: /opt/worker/worker/target/worker.jar
 
 - name: Create worker env directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
   ansible.builtin.file:
