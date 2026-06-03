@@ -44,14 +44,14 @@
     owner: poll
     group: poll
     mode: '0640'
-  notify: Restart poll
+  notify: restart poll
 
 - name: deploy poll systemd service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
   ansible.builtin.copy:
     src: poll.service
     dest: /etc/systemd/system/poll.service
     mode: '0644'
-  notify: Restart poll
+  notify: restart poll
 
 - name: enable and start poll service # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html
   ansible.builtin.systemd:
