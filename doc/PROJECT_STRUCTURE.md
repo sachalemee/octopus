@@ -5,6 +5,7 @@
 ├── group_vars
 │
 ├── roles
+│   │
 │   ├── base
 │   │   └── tasks
 │   │
@@ -12,7 +13,7 @@
 │   │   ├── files
 │   │   ├── handlers
 │   │   ├── tasks
-│   │   └── template
+│   │   └── templates
 │   │
 │   ├── postgresql
 │   │   ├── files
@@ -26,13 +27,18 @@
 │   │
 │   ├── result
 │   │   ├── files
-│   │   └── tasks
+│   │   ├── handlers
+│   │   ├── tasks
+│   │   └── templates
 │   │
 │   └── worker
 │       ├── files
-│       └── tasks
+│       ├── handlers
+│       ├── tasks
+│       └── templates
 │
 ├── one-click.sh
+├── inventory.ini
 │
 ├── playbook.yml
 ├── result.tar

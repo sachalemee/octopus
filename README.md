@@ -43,22 +43,22 @@ Edit or create an inventory file (typically in `/etc/ansible/hosts` or a local `
 
 ```ini
 [redis]
-redis-server ansible_host=192.168.1.10 ansible_user=ubuntu
+redis-1 ansible_host=192.168.1.100 ansible_user=vboxuser
 
 [postgresql]
-postgres-server ansible_host=192.168.1.11 ansible_user=ubuntu
+postgresql-1 ansible_host=192.168.1.101 ansible_user=vboxuser
 
 [poll]
-poll-server ansible_host=192.168.1.12 ansible_user=ubuntu
+poll-1 ansible_host=192.168.1.102 ansible_user=vboxuser
 
 [worker]
-worker-server ansible_host=192.168.1.13 ansible_user=ubuntu
+worker-1 ansible_host=192.168.1.103 ansible_user=vboxuser
 
 [result]
-result-server ansible_host=192.168.1.14 ansible_user=ubuntu
+result-1 ansible_host=192.168.1.104 ansible_user=vboxuser
 
 [all:vars]
-ansible_become_pass=your_sudo_password
+ansible_password=changeme
 ```
 
 4. **Run the playbook:**
