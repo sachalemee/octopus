@@ -20,13 +20,15 @@
     owner: result
     group: result
     mode: '0755'
+    recurse: true
 
 - name: Upload result archive # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarchive_module.html
   ansible.builtin.unarchive:
     src: result.tar
-    dest: /opt/result
+    dest: /opt/
     owner: result
     group: result
+    creates: /opt/result/package.json
 
 - name: Install result dependencies # https://docs.ansible.com/ansible/latest/collections/community/general/npm_module.html
   community.general.npm:
