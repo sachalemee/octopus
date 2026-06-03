@@ -65,4 +65,4 @@
     name: worker
     state: started
     enabled: true
-    daemon_reload: true```
+    daemon_reload: true
