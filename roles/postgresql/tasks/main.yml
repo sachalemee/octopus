@@ -13,6 +13,13 @@
     state: started
     enabled: true
 
+- name: configure postgresql listen_addresses # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/lineinfile_module.html
+  ansible.builtin.lineinfile:
+    path: /etc/postgresql/16/main/postgresql.conf
+    regexp: "^#?listen_addresses"
+    line: "listen_addresses = '*'"
+  notify: restart postgresql
+
 - name: deploy pg_hba.conf # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
   ansible.builtin.copy:
     src: pg_hba.conf
@@ -37,14 +44,13 @@
     state: present
   become_user: postgres
 
-- name: upload schema.sql to remote # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/copy_module.html
-  ansible.builtin.copy:
-    src: schema.sql
-    dest: "/tmp/schema.sql"
-    mode: '0644'
-
-- name: apply schema to paul database # https://docs.ansible.com/projects/ansible/latest/collections/community/postgresql/postgresql_script_module.html
-  community.postgresql.postgresql_script:
+- name: create votes table # https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_table_module.html
+  community.postgresql.postgresql_table:
     db: "{{ postgresql_db }}"
-    path: /tmp/schema.sql
+    name: votes
+    owner: "{{ postgresql_user }}"
+    columns:
+      - id VARCHAR(255) NOT NULL UNIQUE
+      - vote VARCHAR(255) NOT NULL
+    state: present
   become_user: postgres
