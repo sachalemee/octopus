@@ -6,7 +6,7 @@ After=network.target
 [Service]
 WorkingDirectory=/opt/worker/worker
 EnvironmentFile=/etc/worker/worker.env
-ExecStart=/usr/bin/java -jar /opt/worker/worker/target/worker.jar
+ExecStart=/usr/bin/java -jar /opt/worker/worker/target/worker-jar-with-dependencies.jar
 Restart=always
 User=worker
 

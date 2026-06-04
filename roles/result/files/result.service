@@ -9,6 +9,7 @@ EnvironmentFile=/etc/result/result.env
 ExecStart=/usr/bin/node server.js
 Restart=always
 User=result
+AmbientCapabilities=CAP_NET_BIND_SERVICE
 
 [Install]
 WantedBy=multi-user.target
