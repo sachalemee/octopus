@@ -28,6 +28,13 @@
     dest: /opt/poll
     owner: poll
     group: poll
+    creates: /opt/poll/poll/app.py
+
+- name: install poll dependencies # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/pip_module.html
+  ansible.builtin.pip:
+    requirements: /opt/poll/poll/requirements.txt
+    virtualenv: /opt/poll/venv
+    virtualenv_command: python3 -m venv
 
 - name: create poll env directory # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html
   ansible.builtin.file:

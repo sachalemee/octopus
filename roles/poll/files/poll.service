@@ -5,9 +5,9 @@ Description=Poll web service
 After=network.target
 
 [Service]
-WorkingDirectory=/opt/poll
+WorkingDirectory=/opt/poll/poll
 EnvironmentFile=/etc/poll/poll.env
-ExecStart=/usr/bin/flask run --host=0.0.0.0 --port=80
+ExecStart=/opt/poll/venv/bin/flask run --host=0.0.0.0 --port=80
 Restart=always
 User=poll
 
