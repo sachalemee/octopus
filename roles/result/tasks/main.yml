@@ -20,7 +20,6 @@
     owner: result
     group: result
     mode: '0755'
-    recurse: true
 
 - name: Upload result archive # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/unarchive_module.html
   ansible.builtin.unarchive:

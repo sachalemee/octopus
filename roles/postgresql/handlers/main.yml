@@ -1,5 +1,5 @@
 # https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html
-- name: restart postgresql # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/service_module.html
+- name: restart postgresql # sudo cat /usr/lib/systemd/system/postgresql.service
   ansible.builtin.service:
-    name: postgresql
+    name: postgresql@16-main
     state: restarted
