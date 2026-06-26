@@ -1,3 +1,24 @@
+- name: ensure pgdg keyring directory exists # debian 13 ships postgresql-17 by default, postgresql-16 needs the official pgdg repo | https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/file_module.html
+  ansible.builtin.file:
+    path: /usr/share/postgresql-common/pgdg
+    state: directory
+    mode: '0755'
+
+- name: download postgresql apt signing key # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/get_url_module.html
+  ansible.builtin.get_url:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    dest: /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
+    mode: '0644'
+
+- name: add postgresql apt repository # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/deb822_repository_module.html
+  ansible.builtin.deb822_repository:
+    name: pgdg
+    types: deb
+    uris: https://apt.postgresql.org/pub/repos/apt
+    suites: "{{ ansible_distribution_release }}-pgdg"
+    components: main
+    signed_by: /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
+
 - name: install postgresql package # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html
   ansible.builtin.apt:
     name:
@@ -7,9 +28,9 @@
     state: present
     update_cache: true
 
-- name: enable and start postgresql service # https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_module.html
+- name: enable and start postgresql service # postgresql.service is a oneshot wrapper, the real cluster daemon is postgresql@16-main
   ansible.builtin.service:
-    name: postgresql
+    name: postgresql@16-main
     state: started
     enabled: true
 

@@ -19,6 +19,7 @@
       - python3-pip
       - systemd
       - sudo
+      - acl
     state: present
 
 - name: set utc timezone
