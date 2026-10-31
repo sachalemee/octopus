@@ -9,7 +9,6 @@ By *Marin Jeunot*(marin.jeunot@epitech.eu) & *Sacha Lemée*(sacha.lemee@epitech.
 ## Objective
 
 - "*You are going to work again with the poll application you worked with during the Popeye project. [...]. This time, you are going to deploy the application onto 5 different machines, without using containers, by using Ansible.*"
-[OCTOPUS EPITECH Subject](doc/G-DOP-400_octopus.pdf)
 
 ## Getting Started
 
@@ -20,6 +19,7 @@ This project requires:
 - SSH access to target machines (with SSH keys configured)
 - Python 3 on target machines
 - Linux/Unix environment (control node)
+- An Ansible Vault holding the PostgreSQL password (not included in this repository, see step 4)
 
 *No external libraries beyond Ansible are required.*
 
@@ -28,13 +28,13 @@ This project requires:
 1. **Clone the repository:**
 
 ```sh
-git clone git@github.com:EpitechPGE2-2025/G-DOP-400-PAR-4-1-octopus-15.git
+git clone git@github.com:sachalemee/octopus.git
 ```
 
 2. **Navigate to the project directory:**
 
 ```sh
-cd G-DOP-400-PAR-4-1-octopus-15
+cd octopus
 ```
 
 3. **Configure your inventory:**
@@ -61,10 +61,33 @@ result-1 ansible_host=192.168.1.104 ansible_user=vboxuser
 ansible_password=changeme
 ```
 
-4. **Run the playbook:**
+4. **Create the Ansible Vault:**
+
+The deployment reads the PostgreSQL password from the `vault_postgresql_password` variable. The original vault is not published, so you need to create your own before deploying.
+
+Store your vault password in the file used by `one-click.sh`:
 
 ```sh
-ansible-playbook playbook.yml -i inventory.ini
+printf '%s\n' 'your-vault-password' > /tmp/.vault_pass
+chmod 600 /tmp/.vault_pass
+```
+
+Then create the encrypted vault:
+
+```sh
+ansible-vault create group_vars/all/vault.yml --vault-password-file /tmp/.vault_pass
+```
+
+And add this content to it:
+
+```yaml
+vault_postgresql_password: your-postgresql-password
+```
+
+5. **Run the playbook:**
+
+```sh
+ansible-playbook playbook.yml -i inventory.ini --vault-password-file /tmp/.vault_pass
 ```
 
 Or use the one-click deployment script:

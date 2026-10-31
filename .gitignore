@@ -1,3 +1,4 @@
 inventory.ini
 Vagrantfile
 .vagrant
+group_vars/all/vault.yml
